@@ -1,30 +1,34 @@
 import os
 
-
-def get_ds_directory_uri(cur_dir, ag):
+def get_ds_path_uri(ag, path):
     """
-    Given the current directory on DesignSafe, determine the correct input URI.
+    Given a path on DesignSafe, determine the correct input URI.
 
     Args:
         ag (object): Agave object to fetch profiles or metadata.
-        cur_dir (str): The current directory path.
+        path (str): The directory path.
 
     Returns:
         str: The corresponding input URI.
+       
+    Raises:
+        ValueError: If no matching directory pattern is found.
     """
 
-    # If any of the following directory patterns are found in the current directory,
+    # If any of the following directory patterns are found in the path,
     # process them accordingly.
     directory_patterns = [
         ("jupyter/MyData", "designsafe.storage.default"),
         ("jupyter/mydata", "designsafe.storage.default"),
         ("jupyter/CommunityData", "designsafe.storage.community"),
+        ('/MyData', 'designsafe.storage.default'),
+        ('/mydata', 'designsafe.storage.default'),
     ]
 
     for pattern, storage in directory_patterns:
-        if pattern in cur_dir:
-            cur_dir = cur_dir.split(pattern).pop()
-            input_dir = ag.profiles.get()["username"] + cur_dir
+        if pattern in path:
+            path = path.split(pattern).pop()
+            input_dir = ag.profiles.get()["username"] + path
             input_uri = f"agave://{storage}/{input_dir}"
             return input_uri.replace(" ", "%20")
 
@@ -34,13 +38,13 @@ def get_ds_directory_uri(cur_dir, ag):
     ]
 
     for pattern, prefix in project_patterns:
-        if pattern in cur_dir:
-            cur_dir = cur_dir.split(pattern + "/").pop()
-            project_id = cur_dir.split("/")[0]
+        if pattern in path:
+            path = path.split(pattern + "/").pop()
+            project_id = path.split("/")[0]
             query = {"value.projectId": str(project_id)}
-            cur_dir = cur_dir.split(project_id).pop()
+            path = path.split(project_id).pop()
             project_uuid = ag.meta.listMetadata(q=str(query))[0]["uuid"]
-            input_uri = f"agave://{prefix}{project_uuid}{cur_dir}"
+            input_uri = f"agave://{prefix}{project_uuid}{path}"
             return input_uri.replace(" ", "%20")
 
-    return None
+    raise ValueError(f"No matching directory pattern found for: {path}")
