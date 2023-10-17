@@ -1,6 +1,10 @@
 import time
 from datetime import datetime, timedelta, timezone
 from tqdm import tqdm
+import logging
+
+# Configuring the logging system
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def get_status(ag, job_id, time_lapse=15):
     """
@@ -63,3 +67,27 @@ def get_status(ag, job_id, time_lapse=15):
         print("Warning: Maximum monitoring time reached!")
 
     return status
+
+def get_runtime(ag, job_id):
+    """Get the runtime of a job.
+    
+    Args:
+        ag (object): The Agave object that has the job details.
+        job_id (str): The ID of the job for which the runtime needs to be determined.
+
+    Returns:
+        None: This function doesn't return a value, but it logs the runtime details.
+
+    """
+
+    logging.info("Runtime Summary")
+    logging.info("---------------")
+
+    hist = ag.jobs.getHistory(jobId=job_id)
+    logging.info("TOTAL   time: %s", hist[-1]["created"] - hist[0]["created"])
+
+    for i in range(len(hist) - 1):  # To avoid index out of range error in `hist[i+1]`
+        if hist[i]["status"] == 'RUNNING':
+            logging.info("RUNNING time: %s", hist[i+1]["created"] - hist[i]["created"])
+        if hist[i]["status"] == 'QUEUED':
+            logging.info("QUEUED  time: %s", hist[i+1]["created"] - hist[i]["created"])

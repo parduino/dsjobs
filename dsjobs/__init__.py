@@ -1,1 +1,1 @@
-from .jobs import get_status
+from .jobs import get_status, get_runtime

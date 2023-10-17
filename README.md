@@ -13,6 +13,12 @@ Install `dsjobs` via pip (**coming soon**)
 pip3 install dsjobs
 ```
 
+To install the current development version of the library use:
+
+```shell
+pip install git+https://github.com/geoelements/dsjobs.git --quiet
+```
+
 ## Features
 
 * Simplified TAPIS v2 Calls: No need to fiddle with complex API requests. `dsjobs` abstracts away the complexities.

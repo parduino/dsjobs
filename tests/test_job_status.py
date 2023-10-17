@@ -20,7 +20,8 @@ class TestGetStatus(unittest.TestCase):
         ]
         
         # Define behavior for get method
-        mock_agave.jobs.get.return_value = {"maxHours": 0.01}  # Equivalent to 36 seconds
+        # Equivalent to 36 seconds
+        mock_agave.jobs.get.return_value = {"maxHours": 0.01}  
 
         # Call get_status
         status = ds.get_status(mock_agave, "some_job_id", time_lapse=1)
