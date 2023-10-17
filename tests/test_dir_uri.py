@@ -1,5 +1,5 @@
 import unittest
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 
 from dsjobs import get_ds_path_uri
 
@@ -15,7 +15,8 @@ class TestGetDsPathUri(unittest.TestCase):
         # Mocking ag.meta.listMetadata to always return a list with a specific uuid
         self.ag.meta.listMetadata.return_value = [{"uuid": "12345"}]
 
-    def test_directory_patterns(self):
+    @patch("os.path.exists", return_value=True)
+    def test_directory_patterns(self, mock_path_exists):
         test_cases = [
             (
                 "jupyter/MyData/somepath",
@@ -34,7 +35,8 @@ class TestGetDsPathUri(unittest.TestCase):
             with self.subTest(path=path):
                 self.assertEqual(get_ds_path_uri(self.ag, path), expected)
 
-    def test_project_patterns(self):
+    @patch("os.path.exists", return_value=True)
+    def test_project_patterns(self, mock_path_exists):
         test_cases = [
             ("jupyter/MyProjects/ProjA/subdir", "agave://project-12345/subdir"),
             ("jupyter/projects/ProjB/anotherdir", "agave://project-12345/anotherdir"),
@@ -43,7 +45,8 @@ class TestGetDsPathUri(unittest.TestCase):
             with self.subTest(path=path):
                 self.assertEqual(get_ds_path_uri(self.ag, path), expected)
 
-    def test_no_matching_pattern(self):
+    @patch("os.path.exists", return_value=False)
+    def test_no_matching_pattern(self, mock_path_exists):
         with self.assertRaises(ValueError):
             get_ds_path_uri(self.ag, "jupyter/unknownpath/subdir")
 
