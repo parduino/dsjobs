@@ -1,5 +1,6 @@
 import os
 
+
 def get_ds_path_uri(ag, path):
     """
     Given a path on DesignSafe, determine the correct input URI.
@@ -10,7 +11,7 @@ def get_ds_path_uri(ag, path):
 
     Returns:
         str: The corresponding input URI.
-       
+
     Raises:
         ValueError: If no matching directory pattern is found.
     """
@@ -21,8 +22,8 @@ def get_ds_path_uri(ag, path):
         ("jupyter/MyData", "designsafe.storage.default"),
         ("jupyter/mydata", "designsafe.storage.default"),
         ("jupyter/CommunityData", "designsafe.storage.community"),
-        ('/MyData', 'designsafe.storage.default'),
-        ('/mydata', 'designsafe.storage.default'),
+        ("/MyData", "designsafe.storage.default"),
+        ("/mydata", "designsafe.storage.default"),
     ]
 
     for pattern, storage in directory_patterns:
