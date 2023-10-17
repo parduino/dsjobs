@@ -7,7 +7,6 @@ import dsjobs as ds
 
 
 class TestGetRuntime(unittest.TestCase):
-
     def setUp(self):
         self.ag_mock = MagicMock()
         self.job_id = "12345"
@@ -32,10 +31,10 @@ class TestGetRuntime(unittest.TestCase):
 
         # Check if the correct logging occurred
         logs = self.log_output.getvalue()
-        
-        #self.assertIn("TOTAL   time: 30", logs)
-        #self.assertIn("RUNNING time: 10", logs)
-        #self.assertIn("QUEUED  time: 10", logs)
+
+        # self.assertIn("TOTAL   time: 30", logs)
+        # self.assertIn("RUNNING time: 10", logs)
+        # self.assertIn("QUEUED  time: 10", logs)
 
     def tearDown(self):
         # Cleanup after tests
