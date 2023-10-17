@@ -1,7 +1,7 @@
 # DesignSafe Jobs
 
-[![PyTest](https://github.com/geoelements/dsapps/actions/workflows/pytest.yml/badge.svg)](https://github.com/geoelements/dsapps/actions/workflows/pytest.yml)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/geoelements/dsjobs/main/LICENSE.md)
+[![PyTest](https://github.com/geoelements/dsjobs/actions/workflows/pytest.yml/badge.svg)](https://github.com/geoelements/dsjobs/actions/workflows/pytest.yml)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
 
 `dsjobs` is a library that simplifies the process of submitting, running, and monitoring [TAPIS v2 / AgavePy](https://agavepy.readthedocs.io/en/latest/index.html) jobs on [DesignSafe](https://designsafe-ci.org) via [Jupyter Notebooks](https://jupyter.designsafe-ci.org).
 
