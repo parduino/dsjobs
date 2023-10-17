@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "dsjobs"
+version = "0.1.0"
+description = ""
+authors = [
+    "Pedro Arduino <parduino@uw.edu>", 
+    "Krishna Kumar <krishnak@utexas.edu>"
+]
+readme = "README.md"
+packages = [{include = "dsjobs"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+tqdm = "^4.66.1"
+agavepy = "^0.9.5"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
