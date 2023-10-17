@@ -23,6 +23,21 @@ pip3 install dsjobs
 
 For any questions, issues, or feedback submit an [issue](https://github.com/geoelements/dsjobs/issues/new)
 
+## Development
+
+To develop or test the library locally. Install [Poetry](https://python-poetry.org/docs/#installation). In the current repository run the following commands
+
+```shell
+poetry shell
+poetry install
+poetry build
+```
+
+To run the unit test
+```shell
+poetry run pytest -v
+```
+
 ## License
 
 `dsjobs` is licensed under the [MIT License](LICENSE.md).
