@@ -10,7 +10,7 @@ readme = "README.md"
 packages = [{include = "dsjobs"}]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.9"
 tqdm = "^4.66.1"
 agavepy = "^0.9.5"
 
