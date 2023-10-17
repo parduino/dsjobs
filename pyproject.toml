@@ -13,6 +13,7 @@ packages = [{include = "dsjobs"}]
 python = "^3.9"
 tqdm = "^4.66.1"
 agavepy = "^0.9.5"
+exceptiongroup = "^1.1.3"
 
 
 [tool.poetry.group.dev.dependencies]
