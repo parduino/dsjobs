@@ -4,9 +4,9 @@ from tqdm import tqdm
 import logging
 
 # Configuring the logging system
-logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
-)
+# logging.basicConfig(
+#     level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+# )
 
 
 def get_status(ag, job_id, time_lapse=15):
