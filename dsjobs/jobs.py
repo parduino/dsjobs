@@ -67,7 +67,7 @@ def get_status(ag, job_id, time_lapse=15):
         time.sleep(time_lapse)
     else:
         # This block will execute if the for loop completes without a 'break'
-        print("Warning: Maximum monitoring time reached!")
+        logging.warn("Warning: Maximum monitoring time reached!")
 
     return status
 
