@@ -72,7 +72,7 @@ def get_status(ag, job_id, time_lapse=15):
     return status
 
 
-def get_runtime(ag, job_id):
+def runtime_summary(ag, job_id):
     """Get the runtime of a job.
 
     Args:
@@ -80,22 +80,36 @@ def get_runtime(ag, job_id):
         job_id (str): The ID of the job for which the runtime needs to be determined.
 
     Returns:
-        None: This function doesn't return a value, but it logs the runtime details.
+        None: This function doesn't return a value, but it prints the runtime details.
 
     """
 
-    logging.info("Runtime Summary")
-    logging.info("---------------")
+    print("Runtime Summary")
+    print("---------------")
 
-    hist = ag.jobs.getHistory(jobId=job_id)
-    logging.info("TOTAL   time: %s", hist[-1]["created"] - hist[0]["created"])
+    job_history = ag.jobs.getHistory(jobId=job_id)
+    total_time = job_history[-1]["created"] - job_history[0]["created"]
 
-    for i in range(len(hist) - 1):  # To avoid index out of range error in `hist[i+1]`
-        if hist[i]["status"] == "RUNNING":
-            logging.info(
-                "RUNNING time: %s", hist[i + 1]["created"] - hist[i]["created"]
-            )
-        if hist[i]["status"] == "QUEUED":
-            logging.info(
-                "QUEUED  time: %s", hist[i + 1]["created"] - hist[i]["created"]
-            )
+    status_times = {}
+
+    for i in range(
+        len(job_history) - 1
+    ):  # To avoid index out of range error in `job_history[i+1]`
+        current_status = job_history[i]["status"]
+        elapsed_time = job_history[i + 1]["created"] - job_history[i]["created"]
+
+        # Aggregate times for each status
+        if current_status in status_times:
+            status_times[current_status] += elapsed_time
+        else:
+            status_times[current_status] = elapsed_time
+
+    # Determine the max width of status names for alignment
+    max_status_width = max(len(status) for status in status_times.keys())
+
+    # Print the aggregated times for each unique status in a table format
+    for status, time in status_times.items():
+        print(f"{status.upper():<{max_status_width + 2}} time: {time}")
+
+    print(f"{'TOTAL':<{max_status_width + 2}} time: {total_time}")
+    print("---------------")
