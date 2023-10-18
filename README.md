@@ -1,6 +1,6 @@
 # DesignSafe Jobs
 
-[![PyTest](https://github.com/geoelements/dsjobs/actions/workflows/pytest.yml/badge.svg)](https://github.com/geoelements/dsjobs/actions/workflows/lint-test.yml)
+[![Lint and test](https://github.com/geoelements/dsjobs/actions/workflows/lint-test.yml/badge.svg)](https://github.com/geoelements/dsjobs/actions/workflows/lint-test.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
 
 `dsjobs` is a library that simplifies the process of submitting, running, and monitoring [TAPIS v2 / AgavePy](https://agavepy.readthedocs.io/en/latest/index.html) jobs on [DesignSafe](https://designsafe-ci.org) via [Jupyter Notebooks](https://jupyter.designsafe-ci.org).
@@ -17,6 +17,48 @@ To install the current development version of the library use:
 
 ```shell
 pip install git+https://github.com/geoelements/dsjobs.git --quiet
+```
+
+## Example usage:
+
+On [DesignSafe Jupyter](https://jupyter.designsafe-ci.org/):
+
+Install the latest version of `dsjobs` and restart the kernel (Kernel >> Restart Kernel):
+
+```python
+# Remove any previous installations
+!pip uninstall dsjobs -y
+# Install 
+!pip install git+https://github.com/geoelements/dsjobs.git --quiet
+```
+
+* Import `dsjobs` library
+```python
+import dsjobs as ds
+```
+
+* To list all functions in `dsjobs`
+```python
+dir(ds)
+```
+
+### Job management
+
+* Monitor job status
+```python
+ds.get_status(ag, job["id"])
+```
+
+* Get runtime information of a job
+```
+ds.get_runtime(ag, job["id"])
+```
+
+### Directory access
+
+* Access DesignSafe path URI:
+```python
+input_uri = ds.get_ds_path_uri(ag, '/MyData/<path-in-designsafe/')
 ```
 
 ## Features
