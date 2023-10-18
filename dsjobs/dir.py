@@ -16,9 +16,6 @@ def get_ds_path_uri(ag, path):
         ValueError: If no matching directory pattern is found.
     """
 
-    if not os.path.exists(path):
-        raise ValueError(f"The provided path does not exist: {path}")
-
     # If any of the following directory patterns are found in the path,
     # process them accordingly.
     directory_patterns = [
