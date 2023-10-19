@@ -113,3 +113,55 @@ def runtime_summary(ag, job_id):
 
     print(f"{'TOTAL':<{max_status_width + 2}} time: {total_time}")
     print("---------------")
+
+
+def generate_job_info(
+    ag,
+    appid: str,
+    jobname: str = "dsjob",
+    queue: str = "skx-dev",
+    nnodes: int = 1,
+    nprocessors: int = 1,
+    runtime: str = "00:10:00",
+    inputs=None,
+    parameters=None,
+) -> dict:
+    """Generate a job information dictionary based on provided arguments.
+
+    Args:
+        ag (object): The Agave object to interact with the platform.
+        appid (str): The application ID for the job.
+        jobname (str, optional): The name of the job. Defaults to 'dsjob'.
+        queue (str, optional): The batch queue name. Defaults to 'skx-dev'.
+        nnodes (int, optional): The number of nodes required. Defaults to 1.
+        nprocessors (int, optional): The number of processors per node. Defaults to 1.
+        runtime (str, optional): The maximum runtime in the format 'HH:MM:SS'. Defaults to '00:10:00'.
+        inputs (dict, optional): The inputs for the job. Defaults to None.
+        parameters (dict, optional): The parameters for the job. Defaults to None.
+
+    Returns:
+        dict: A dictionary containing the job information.
+
+    Raises:
+        ValueError: If the provided appid is not valid.
+    """
+
+    try:
+        app = ag.apps.get(appId=appid)
+    except Exception:
+        raise ValueError(f"Invalid app ID: {appid}")
+
+    job_info = {
+        "appId": appid,
+        "name": jobname,
+        "batchQueue": queue,
+        "nodeCount": nnodes,
+        "processorsPerNode": nprocessors,
+        "memoryPerNode": "1",
+        "maxRunTime": runtime,
+        "archive": True,
+        "inputs": inputs,
+        "parameters": parameters,
+    }
+
+    return job_info
