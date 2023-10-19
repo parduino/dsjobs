@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import Mock, patch
-from dsjobs import jobs  # Importing the function from the specified library and file
+from dsjobs import jobs
 
 
 class TestGenerateJobInfo(unittest.TestCase):
@@ -46,8 +46,6 @@ class TestGenerateJobInfo(unittest.TestCase):
         self.assertTrue(result["archive"])
         self.assertIsNone(result["inputs"])
         self.assertIsNone(result["parameters"])
-
-    # Add more tests as needed...
 
 
 if __name__ == "__main__":
