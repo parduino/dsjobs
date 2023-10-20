@@ -1,6 +1,6 @@
 # DesignSafe Jobs
 
-[![Lint and test](https://github.com/geoelements/dsjobs/actions/workflows/lint-test.yml/badge.svg)](https://github.com/geoelements/dsjobs/actions/workflows/lint-test.yml)
+[![Lint and test](https://github.com/DesignSafe-CI/dsjobs/actions/workflows/lint-test.yml/badge.svg)](https://github.com/DesignSafe-CI/dsjobs/actions/workflows/lint-test.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
 
 `dsjobs` is a library that simplifies the process of submitting, running, and monitoring [TAPIS v2 / AgavePy](https://agavepy.readthedocs.io/en/latest/index.html) jobs on [DesignSafe](https://designsafe-ci.org) via [Jupyter Notebooks](https://jupyter.designsafe-ci.org).
@@ -16,7 +16,7 @@ pip3 install dsjobs
 To install the current development version of the library use:
 
 ```shell
-pip install git+https://github.com/geoelements/dsjobs.git --quiet
+pip install git+https://github.com/DesignSafe-CI/dsjobs.git --quiet
 ```
 
 ## Example usage:
@@ -29,7 +29,7 @@ Install the latest version of `dsjobs` and restart the kernel (Kernel >> Restart
 # Remove any previous installations
 !pip uninstall dsjobs -y
 # Install 
-!pip install git+https://github.com/geoelements/dsjobs.git --quiet
+!pip install git+https://github.com/DesignSafe-CI/dsjobs.git --quiet
 ```
 
 * Import `dsjobs` library
@@ -69,7 +69,7 @@ input_uri = ds.get_ds_path_uri(ag, '/MyData/<path-in-designsafe/')
 
 ## Support
 
-For any questions, issues, or feedback submit an [issue](https://github.com/geoelements/dsjobs/issues/new)
+For any questions, issues, or feedback submit an [issue](https://github.com/DesignSafe-CI/dsjobs/issues/new)
 
 ## Development
 
