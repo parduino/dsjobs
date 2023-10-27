@@ -165,3 +165,34 @@ def generate_job_info(
     }
 
     return job_info
+
+
+def get_archive_path(ag, job_id):
+    """
+    Get the archive path for a given job ID and modifies the user directory
+    to '/home/jupyter/MyData'.
+
+    Args:
+        ag (object): The Agave object to interact with the platform.
+        job_id (str): The job ID to retrieve the archive path for.
+
+    Returns:
+        str: The modified archive path.
+
+    Raises:
+        ValueError: If the archivePath format is unexpected.
+    """
+
+    # Fetch the job info.
+    job_info = ag.jobs.get(jobId=job_id)
+
+    # Try to split the archive path to extract the user.
+    try:
+        user, _ = job_info.archivePath.split("/", 1)
+    except ValueError:
+        raise ValueError(f"Unexpected archivePath format for jobId={job_id}")
+
+    # Construct the new path.
+    new_path = job_info.archivePath.replace(user, "/home/jupyter/MyData")
+
+    return new_path
