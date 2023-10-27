@@ -1,10 +1,10 @@
 [tool.poetry]
 name = "dsjobs"
-version = "0.1.0"
-description = ""
+version = "0.1.1"
+description = "DSJobs simplifies accessing TAPIS on DesignSafe"
 authors = [
-    "Pedro Arduino <parduino@uw.edu>", 
-    "Krishna Kumar <krishnak@utexas.edu>"
+    "Krishna Kumar <krishnak@utexas.edu>",
+    "Pedro Arduino <parduino@uw.edu>"
 ]
 readme = "README.md"
 packages = [{include = "dsjobs"}]
