@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dsjobs"
-version = "0.1.1"
+version = "0.1.2"
 description = "DSJobs simplifies accessing TAPIS on DesignSafe"
 authors = [
     "Krishna Kumar <krishnak@utexas.edu>",
