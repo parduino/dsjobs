@@ -28,7 +28,7 @@ class TestGetDsPathUri(unittest.TestCase):
             ),
             (
                 "jupyter/CommunityData/communitypath",
-                "agave://designsafe.storage.community/testuser/communitypath",
+                "agave://designsafe.storage.community//communitypath",
             ),
         ]
         for path, expected in test_cases:

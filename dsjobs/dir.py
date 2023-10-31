@@ -19,17 +19,17 @@ def get_ds_path_uri(ag, path):
     # If any of the following directory patterns are found in the path,
     # process them accordingly.
     directory_patterns = [
-        ("jupyter/MyData", "designsafe.storage.default"),
-        ("jupyter/mydata", "designsafe.storage.default"),
-        ("jupyter/CommunityData", "designsafe.storage.community"),
-        ("/MyData", "designsafe.storage.default"),
-        ("/mydata", "designsafe.storage.default"),
+        ("jupyter/MyData", "designsafe.storage.default", True),
+        ("jupyter/mydata", "designsafe.storage.default", True),
+        ("jupyter/CommunityData", "designsafe.storage.community", False),
+        ("/MyData", "designsafe.storage.default", True),
+        ("/mydata", "designsafe.storage.default", True),
     ]
 
-    for pattern, storage in directory_patterns:
+    for pattern, storage, use_username in directory_patterns:
         if pattern in path:
             path = path.split(pattern).pop()
-            input_dir = ag.profiles.get()["username"] + path
+            input_dir = ag.profiles.get()["username"] + path if use_username else path
             input_uri = f"agave://{storage}/{input_dir}"
             return input_uri.replace(" ", "%20")
 
