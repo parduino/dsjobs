@@ -1,7 +1,8 @@
 # DesignSafe Jobs
 
-[![Lint and test](https://github.com/DesignSafe-CI/dsjobs/actions/workflows/lint-test.yml/badge.svg)](https://github.com/DesignSafe-CI/dsjobs/actions/workflows/lint-test.yml)
+[![build and test](https://github.com/DesignSafe-CI/dsjobs/actions/workflows/build-test.yml/badge.svg)](https://github.com/DesignSafe-CI/dsjobs/actions/workflows/build-test.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
+[![Docs](https://img.shields.io/badge/view-docs-8A2BE2?color=8A2BE2)](https://designsafe-ci.github.io/dsjobs/dsjobs/index.html)
 
 `dsjobs` is a library that simplifies the process of submitting, running, and monitoring [TAPIS v2 / AgavePy](https://agavepy.readthedocs.io/en/latest/index.html) jobs on [DesignSafe](https://designsafe-ci.org) via [Jupyter Notebooks](https://jupyter.designsafe-ci.org).
 
@@ -29,6 +30,8 @@ pip install git+https://github.com/DesignSafe-CI/dsjobs.git --quiet
 
 * [Jupyter Notebook Templates](example-notebooks/template-mpm-run.ipynb) using DSJobs.
 
+* View [DSJobs API doc](https://designsafe-ci.github.io/dsjobs/dsjobs/index.html)
+
 On [DesignSafe Jupyter](https://jupyter.designsafe-ci.org/):
 
 Install the latest version of `dsjobs` and restart the kernel (Kernel >> Restart Kernel):
@@ -51,6 +54,8 @@ dir(ds)
 ```
 
 ## Documentation
+
+View [DSJobs API doc](https://designsafe-ci.github.io/dsjobs/dsjobs/index.html)
 
 To generate API docs:
 
