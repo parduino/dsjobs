@@ -97,11 +97,11 @@ TOTAL               time: 0:11:00
         expected_output_verbose_false = """
 Runtime Summary
 ---------------
-PENDING             time: 0:00:03
-PROCESSING_INPUTS   time: 0:00:04
-RUNNING             time: 0:00:08
-FINISHED            time: 0:00:00
-TOTAL               time: 0:11:00
+PENDING    time: 0:00:03
+QUEUED     time: 0:00:26
+RUNNING    time: 0:00:08
+FINISHED   time: 0:00:00
+TOTAL      time: 0:11:00
 ---------------
 """.strip()
 

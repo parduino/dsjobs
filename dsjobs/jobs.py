@@ -107,7 +107,7 @@ def runtime_summary(ag, job_id, verbose=False):
     if not verbose:
         filtered_statuses = {
             "PENDING",
-            "PROCESSING_INPUTS",
+            "QUEUED",
             "RUNNING",
             "FINISHED",
             "FAILED",
