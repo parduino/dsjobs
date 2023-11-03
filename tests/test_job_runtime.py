@@ -51,6 +51,7 @@ class TestRuntimeSummary(unittest.TestCase):
                 "created": start_time + timedelta(minutes=1, seconds=22),
             },  # no change
             {"status": "FINISHED", "created": start_time + timedelta(minutes=11)},
+            {"status": "EMPTY", "created": start_time + timedelta(minutes=11)},
         ]
 
     def capture_output(self, ag_mock, job_id, verbose):
@@ -81,6 +82,7 @@ QUEUED              time: 0:00:26
 RUNNING             time: 0:00:08
 CLEANING_UP         time: 0:00:00
 ARCHIVING           time: 0:09:38
+FINISHED            time: 0:00:00
 TOTAL               time: 0:11:00
 ---------------
 """.strip()
@@ -98,6 +100,7 @@ Runtime Summary
 PENDING             time: 0:00:03
 PROCESSING_INPUTS   time: 0:00:04
 RUNNING             time: 0:00:08
+FINISHED            time: 0:00:00
 TOTAL               time: 0:11:00
 ---------------
 """.strip()
