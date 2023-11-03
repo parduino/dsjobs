@@ -72,12 +72,13 @@ def get_status(ag, job_id, time_lapse=15):
     return status
 
 
-def runtime_summary(ag, job_id):
+def runtime_summary(ag, job_id, verbose=False):
     """Get the runtime of a job.
 
     Args:
         ag (object): The Agave object that has the job details.
         job_id (str): The ID of the job for which the runtime needs to be determined.
+        verbose (bool): If True, prints all statuses. Otherwise, prints only specific statuses.
 
     Returns:
         None: This function doesn't return a value, but it prints the runtime details.
@@ -92,9 +93,7 @@ def runtime_summary(ag, job_id):
 
     status_times = {}
 
-    for i in range(
-        len(job_history) - 1
-    ):  # To avoid index out of range error in `job_history[i+1]`
+    for i in range(len(job_history) - 1):
         current_status = job_history[i]["status"]
         elapsed_time = job_history[i + 1]["created"] - job_history[i]["created"]
 
@@ -103,6 +102,21 @@ def runtime_summary(ag, job_id):
             status_times[current_status] += elapsed_time
         else:
             status_times[current_status] = elapsed_time
+
+    # Filter the statuses if verbose is False
+    if not verbose:
+        filtered_statuses = {
+            "PENDING",
+            "PROCESSING_INPUTS",
+            "RUNNING",
+            "FINISHED",
+            "FAILED",
+        }
+        status_times = {
+            status: time
+            for status, time in status_times.items()
+            if status in filtered_statuses
+        }
 
     # Determine the max width of status names for alignment
     max_status_width = max(len(status) for status in status_times.keys())

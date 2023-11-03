@@ -1,5 +1,5 @@
 import unittest
-from unittest.mock import Mock, patch
+from unittest.mock import Mock
 from io import StringIO
 import sys
 from datetime import datetime, timedelta
@@ -8,14 +8,11 @@ import dsjobs as ds
 
 
 class TestRuntimeSummary(unittest.TestCase):
-    def test_runtime_summary(self):
-        # Create a mock for the `ag` object
-        ag_mock = Mock()
-
-        # Mock the return value for getHistory on the mock object
+    def setUp(self):
+        super().setUp()
+        self.ag_mock = Mock()
         start_time = datetime.now() - timedelta(minutes=10)
-
-        ag_mock.jobs.getHistory.return_value = [
+        self.job_history = [
             {"status": "PENDING", "created": start_time},
             {
                 "status": "PROCESSING_INPUTS",
@@ -56,17 +53,19 @@ class TestRuntimeSummary(unittest.TestCase):
             {"status": "FINISHED", "created": start_time + timedelta(minutes=11)},
         ]
 
-        # Capture the printed output
+    def capture_output(self, ag_mock, job_id, verbose):
         saved_stdout = sys.stdout
         try:
             out = StringIO()
             sys.stdout = out
-            ds.runtime_summary(
-                ag_mock, "mock_id"
-            )  # Passing the mock object to your function
-            output = out.getvalue().strip()
+            ds.runtime_summary(ag_mock, job_id, verbose)
+            return out.getvalue().strip()
         finally:
             sys.stdout = saved_stdout
+
+    def test_runtime_summary_verbose_true(self):
+        self.ag_mock.jobs.getHistory.return_value = self.job_history
+        output = self.capture_output(self.ag_mock, "mock_id", True)
 
         # Expected output based on the mock data
         expected_output = """
@@ -86,8 +85,26 @@ TOTAL               time: 0:11:00
 ---------------
 """.strip()
 
-        self.maxDiff = None
         self.assertEqual(output, expected_output)
+
+    def test_runtime_summary_verbose_false(self):
+        self.ag_mock.jobs.getHistory.return_value = self.job_history
+        output = self.capture_output(self.ag_mock, "mock_id", False)
+
+        # Expected output based on the mock data when verbose=False
+        expected_output_verbose_false = """
+Runtime Summary
+---------------
+PENDING             time: 0:00:03
+PROCESSING_INPUTS   time: 0:00:04
+RUNNING             time: 0:00:08
+TOTAL               time: 0:11:00
+---------------
+""".strip()
+
+        self.assertEqual(output, expected_output_verbose_false)
+
+    # Additional tests...
 
 
 if __name__ == "__main__":
