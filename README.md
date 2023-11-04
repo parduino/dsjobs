@@ -1,13 +1,20 @@
 # DesignSafe Jobs
 
-[![Lint and test](https://github.com/DesignSafe-CI/dsjobs/actions/workflows/lint-test.yml/badge.svg)](https://github.com/DesignSafe-CI/dsjobs/actions/workflows/lint-test.yml)
+[![build and test](https://github.com/DesignSafe-CI/dsjobs/actions/workflows/build-test.yml/badge.svg)](https://github.com/DesignSafe-CI/dsjobs/actions/workflows/build-test.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
+[![Docs](https://img.shields.io/badge/view-docs-8A2BE2?color=8A2BE2)](https://designsafe-ci.github.io/dsjobs/dsjobs/index.html)
 
 `dsjobs` is a library that simplifies the process of submitting, running, and monitoring [TAPIS v2 / AgavePy](https://agavepy.readthedocs.io/en/latest/index.html) jobs on [DesignSafe](https://designsafe-ci.org) via [Jupyter Notebooks](https://jupyter.designsafe-ci.org).
 
+## Features
+
+* Simplified TAPIS v2 Calls: No need to fiddle with complex API requests. `dsjobs` abstracts away the complexities.
+
+* Seamless Integration with DesignSafe Jupyter Notebooks: Launch DesignSafe applications directly from the Jupyter environment.
+
 ## Installation
 
-Install `dsjobs` via pip (**coming soon**)
+Install `dsjobs` via pip
 
 ```shell
 pip3 install dsjobs
@@ -21,6 +28,10 @@ pip install git+https://github.com/DesignSafe-CI/dsjobs.git --quiet
 
 ## Example usage:
 
+* [Jupyter Notebook Templates](example-notebooks/template-mpm-run.ipynb) using DSJobs.
+
+* View [DSJobs API doc](https://designsafe-ci.github.io/dsjobs/dsjobs/index.html)
+
 On [DesignSafe Jupyter](https://jupyter.designsafe-ci.org/):
 
 Install the latest version of `dsjobs` and restart the kernel (Kernel >> Restart Kernel):
@@ -29,7 +40,7 @@ Install the latest version of `dsjobs` and restart the kernel (Kernel >> Restart
 # Remove any previous installations
 !pip uninstall dsjobs -y
 # Install 
-!pip install git+https://github.com/DesignSafe-CI/dsjobs.git --quiet
+!pip install dsjobs --quiet
 ```
 
 * Import `dsjobs` library
@@ -42,30 +53,15 @@ import dsjobs as ds
 dir(ds)
 ```
 
-### Job management
+## Documentation
 
-* Monitor job status
-```python
-ds.get_status(ag, job["id"])
+View [DSJobs API doc](https://designsafe-ci.github.io/dsjobs/dsjobs/index.html)
+
+To generate API docs:
+
 ```
-
-* Get runtime information of a job
+pdoc --html --output-dir docs dsjobs --force
 ```
-ds.get_runtime(ag, job["id"])
-```
-
-### Directory access
-
-* Access DesignSafe path URI:
-```python
-input_uri = ds.get_ds_path_uri(ag, '/MyData/<path-in-designsafe/')
-```
-
-## Features
-
-* Simplified TAPIS v2 Calls: No need to fiddle with complex API requests. `dsjobs` abstracts away the complexities.
-
-* Seamless Integration with DesignSafe Jupyter Notebooks: Launch DesignSafe applications directly from the Jupyter environment.
 
 ## Support
 
